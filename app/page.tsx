@@ -242,6 +242,14 @@ function WorkCard({ title, category, year, index }: {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const colors = ["#E8C547", "#7B8CDE", "#6EE7B7", "#F9A8D4"];
+  const projectBgs = [
+    "linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #1a1035 100%)",
+    "linear-gradient(135deg, #0a1628 0%, #0d2444 50%, #0a1a38 100%)",
+    "linear-gradient(135deg, #0a2018 0%, #0d3828 50%, #0a2018 100%)",
+    "linear-gradient(135deg, #28100a 0%, #3d1a0d 50%, #28100a 100%)",
+    "linear-gradient(135deg, #0a0a28 0%, #18183d 50%, #0a0a28 100%)",
+    "linear-gradient(135deg, #1a1a0a 0%, #2d2d10 50%, #1a1a0a 100%)",
+  ];
 
   return (
     <motion.div
@@ -255,20 +263,47 @@ function WorkCard({ title, category, year, index }: {
         className="w-full aspect-[4/3] mb-5 overflow-hidden"
         style={{ background: "#111118" }}
       >
-        {/* Placeholder project visual */}
+        {/* Styled project visual */}
         <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500"
-            style={{ background: `radial-gradient(circle at 60% 40%, ${colors[index % colors.length]}, transparent 60%)` }}
-          />
-          <div className="text-center z-10">
-            <div className="font-display text-6xl font-light text-white/10 group-hover:text-white/20 transition-colors duration-500">
+          {/* Base gradient */}
+          <div className="absolute inset-0 transition-all duration-500"
+            style={{ background: projectBgs[index % projectBgs.length] }} />
+          {/* Grid overlay */}
+          <div className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.3) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+              backgroundSize: "32px 32px"
+            }} />
+          {/* Mock UI elements per project type */}
+          <div className="relative z-10 w-full h-full p-5 flex flex-col justify-between">
+            {/* Top bar */}
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-white/30" />
+              <div className="w-2 h-2 rounded-full bg-white/20" />
+              <div className="w-2 h-2 rounded-full bg-white/15" />
+              <div className="flex-1 mx-2 h-3 rounded bg-white/10" />
+            </div>
+            {/* Mock content rows */}
+            <div className="space-y-2">
+              <div className="h-2 rounded bg-white/20 w-3/4" />
+              <div className="h-2 rounded bg-white/12 w-full" />
+              <div className="h-2 rounded bg-white/12 w-5/6" />
+            </div>
+            {/* Mock card blocks */}
+            <div className="grid grid-cols-3 gap-2">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-8 rounded bg-white/10 border border-white/10" />
+              ))}
+            </div>
+            {/* Project number */}
+            <div className="self-end font-display text-4xl font-light text-white/15 group-hover:text-white/25 transition-colors duration-500">
               {String(index + 1).padStart(2, "0")}
             </div>
           </div>
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gold/0 group-hover:bg-gold/5 transition-all duration-500 flex items-center justify-center">
-            <span className="font-body text-xs tracking-widest uppercase text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center">
+            <span className="font-body text-xs tracking-widest uppercase text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 px-4 py-2 rounded-full border border-white/20">
               View Case Study
             </span>
           </div>
