@@ -27,7 +27,7 @@ function Nav() {
         <a href="#" className="font-display text-2xl font-light tracking-[0.2em] text-cream">
           NEXUS
         </a>
-        {/* Desktop */}
+        {/* ------ Desktop ------ */}
         <div className="hidden md:flex items-center gap-10">
           {["Work", "Services", "Process", "About"].map((item) => (
             <a
